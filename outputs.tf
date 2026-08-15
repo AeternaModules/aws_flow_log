@@ -12,7 +12,7 @@ output "flow_logs_deliver_cross_account_role" {
 }
 output "flow_logs_destination_options" {
   description = "Map of destination_options values across all flow_logs, keyed the same as var.flow_logs"
-  value       = { for k, v in aws_flow_log.flow_logs : k => v.destination_options if v.destination_options != null && length(v.destination_options) > 0 }
+  value       = { for k, v in aws_flow_log.flow_logs : k => one(v.destination_options) if v.destination_options != null && length(v.destination_options) > 0 }
 }
 output "flow_logs_eni_id" {
   description = "Map of eni_id values across all flow_logs, keyed the same as var.flow_logs"
